@@ -11,7 +11,7 @@ public class RequestValidationService implements ValidationService {
 
     @Override
     public void isValid(BindingResult bindingResult) throws ValidationFailedException {
-        log.error("bindingResuil: {}", bindingResult);
+        log.error("bindingResult: {}", bindingResult);
         if(bindingResult.hasErrors()){
             throw new
                     ValidationFailedException(bindingResult.getFieldError().toString());
