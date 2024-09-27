@@ -26,7 +26,7 @@ public class Request {
     @Size(max= 32)
     private String operationUid;
 
-    private String systeName;
+    private Systems systemName;
     @NotBlank
     private String systemTime;
 
@@ -43,7 +43,7 @@ public class Request {
         return "{" +
                 "uid='" +uid + '\'' +
                 ", operationUid='" + operationUid + '\'' +
-                ", systeName='" + systeName + '\'' +
+                ", systeName='" + systemName + '\'' +
                 ", systemTime='" + systemTime + '\'' +
                 ", source='" + source + '\'' +
                 ", communicationId='" + communicationId + '\'' +
