@@ -18,7 +18,7 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class Request {
 
-    @NotBlank
+    @NotBlank(message = "UID не может быть пустым")
     @Size(max= 32)
     private String uid;
 
@@ -26,11 +26,17 @@ public class Request {
     @Size(max= 32)
     private String operationUid;
 
-    private Systems systemName;
+    private String systemName;
     @NotBlank
     private String systemTime;
 
     private String source;
+
+    private Positions positions;
+    private Double salary;
+    private Double bonus;
+    private Integer workDays;
+
     @Min(1)
     @Max(100000)
     private int communicationId;
@@ -39,11 +45,15 @@ public class Request {
     private int productCode;
     private int smsCode;
 
+    public String getTime(){
+        return systemTime;
+    }
+
     public String toString(){
         return "{" +
                 "uid='" +uid + '\'' +
                 ", operationUid='" + operationUid + '\'' +
-                ", systeName='" + systemName + '\'' +
+                ", systemName='" + systemName + '\'' +
                 ", systemTime='" + systemTime + '\'' +
                 ", source='" + source + '\'' +
                 ", communicationId='" + communicationId + '\'' +

@@ -8,7 +8,6 @@ public enum Systems {
     CRM ("Customer Relationship Management"),
     WMS ("Warehouse Management System");
 
-
     public final String name;
 
     Systems (String name){
