@@ -25,16 +25,18 @@ public class MyController {
     private final ModifyResponseService modifyResponseService;
     private final ModifyRequestService modifyRequestService;
     private final AnnualBonusServiceImpl annualBonusService;
+    private final AwardServiceImpl awardService;
 
     @Autowired
     public MyController(ValidationService validationService, CodeExceptionService codeExceptionService,
                         @Qualifier("ModifySystemTimeResponseService") ModifyResponseService modifyResponseService, ModifyRequestService modifyRequestService,
-                        AnnualBonusServiceImpl annualBonusService){
+                        AnnualBonusServiceImpl annualBonusService, AwardServiceImpl awardService){
         this.validationService = validationService;
         this.codeExceptionService = codeExceptionService;
         this.modifyResponseService = modifyResponseService;
         this.modifyRequestService = modifyRequestService;
         this.annualBonusService = annualBonusService;
+        this.awardService = awardService;
     }
 
 
@@ -50,11 +52,11 @@ public class MyController {
                 .operationUid(request.getOperationUid())
                 .systemTime(DateTimeUtil.getCustomFormat().format(new Date()))
                 .code(Codes.SUCCESS)
-                .annualBonus(annualBonusService.calculate(request.getPositions(), request.getSalary(), request.getBonus(), request.getWorkDays()))
+                .annualBonus(annualBonusService.calculate(request.getPositions(), request.getSalary(), request.getBonus(), request.getWorkDays(), request.getSystemTime()))
+                .award(awardService.Award(request.getPositions(), request.getSalary(), request.getBonus(), request.getWorkDays()))
                 .errorCode(ErrorCodes.EMPTY)
                 .errorMessage(ErrorMessages.EMPTY)
                 .build();
-
         log.info("response: {}", response);
 
         try {

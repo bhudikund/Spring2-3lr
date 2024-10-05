@@ -18,24 +18,22 @@ public class AnnualBonusServiceImpl implements AnnualBonusService {
 
 
     @Override
-    public double calculate(Positions positions, double salary, double bonus, int workDays) {
-        return salary * bonus * getYearDays() * positions.getPositionCoefficient() / workDays;
+    public double calculate(Positions positions, double salary, double bonus, int workDays,String systemTime) {
+        int daysInYear = getYearDays(systemTime);
+        return salary * bonus * daysInYear * positions.getPositionCoefficient() / workDays;
     }
 
-    public int getYearDays() {
-        Request request = new Request();
-        System.out.println( request.getTime()+ " Vremya");
-        Instant instant = Instant.parse(request.getSystemTime());
+    public int getYearDays(String systemTime) {
+
+        Instant instant = Instant.parse(systemTime);
+
         ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of("UTC"));
+
         LocalDate localDate = zonedDateTime.toLocalDate();
 
         int daysInYear = localDate.lengthOfYear();
 
-        request.toString();
-
-        System.out.println(daysInYear + " sfdsdwfaf");
-
-        return 0;
+        return daysInYear;
 
     }
 }
